@@ -5,11 +5,14 @@ import { getProductById } from '../../features/slices/productSlice'
 import GradeIcon from '@mui/icons-material/Grade';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from '@mui/material'
+import { addCart } from '../../features/slices/cartSlice'
 
 const DetailsProduct = () => {
 	const { id } = useParams()
 	const dispatch = useDispatch()
 	const { productById, loading, error } = useSelector((state) => state.products)
+	const { items } = useSelector((state) => state.cart)
+	console.log(items)
 
 	useEffect(() => {
 		dispatch(getProductById(id))
@@ -22,7 +25,7 @@ const DetailsProduct = () => {
 		<img src={productById.image} alt="error :)" width={300} />
 		<div style={{marginLeft: '100px'}}>
 			<h2>{productById.title}</h2>
-			<h3 style={{marginTop: '20px'}}>Price: <span style={{color: '#ecb90d'}}>{productById.price}</span> сом</h3>
+			<h3 style={{marginTop: '20px'}}>Цена: <span style={{color: '#ecb90d'}}>{productById.price}</span> сом</h3>
 			<p style={{marginTop: '20px'}}>{productById.description}</p>
 
 			<p style={{marginTop: '20px'}}>Категория: {productById.category}</p>
@@ -30,7 +33,7 @@ const DetailsProduct = () => {
 				<GradeIcon color='warning' />
 				{productById.rating?.rate}
 			</p>
-			<Button variant="contained" endIcon={<ShoppingCartIcon />} sx={{padding: '10px 15px', marginTop: '30px'}}>
+			<Button variant="contained" endIcon={<ShoppingCartIcon />} sx={{padding: '10px 15px', marginTop: '30px'}} onClick={() => dispatch(addCart(productById))}>
 			 	Добавить в корзину
 			</Button>
 		</div>

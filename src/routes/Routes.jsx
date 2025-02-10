@@ -4,6 +4,7 @@ import ProductsPage from '../pages/products/ProductsPage'
 import NotFoundPage from '../pages/not-found/NotFoundPage'
 import CartPage from '../pages/cart/CartPage'
 import DetailsProduct from '../pages/details-products/DetailsProduct'
+import UpdateProduct from '../pages/update-product/UpdateProduct'
 
 const routes = [
 	{
@@ -28,6 +29,11 @@ const routes = [
 	},
 	{
 		id: 5,
+		path: 'update-product/:id',
+		element: <UpdateProduct />
+	},
+	{
+		id: 6,
 		path: '*',
 		element: <NotFoundPage />
 	}
